@@ -20,3 +20,8 @@ Thumbs.db
 # Project generated folders
 nasa/data/
 nasa/workspaces/
+
+# Large Datasets (>100MB)
+Oxford/Oxford_Battery_Degradation_Dataset_1.mat
+Oxford_Battery_Degradation_Dataset_1.mat
+
