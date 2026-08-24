@@ -9,7 +9,7 @@ Downloads and preprocesses all supported battery aging datasets:
   - MATR   (data.matr.io)
 
 Usage:
-    python preprocess_pipeline.py [--datasets CALCE NASA OX HUST MATR] [--skip-download]
+    python scripts/preprocess_pipeline.py [--datasets CALCE NASA OX HUST MATR] [--skip-download]
 """
 
 import os
@@ -20,7 +20,7 @@ import urllib.request
 from pathlib import Path
 
 # Add project root to path
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from batteryml.preprocess.download import download_file, DOWNLOAD_LINKS

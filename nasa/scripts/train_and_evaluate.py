@@ -5,7 +5,7 @@ Trains an XGBoost SOH predictor on the NASA battery dataset and saves
 the trained model as a .pkl file.
 
 Usage:
-    python train_and_evaluate.py [--seed 0]
+    python scripts/train_and_evaluate.py [--seed 0]
 """
 
 import sys
@@ -13,7 +13,7 @@ import pickle
 import argparse
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 # Ensure all batteryml modules are registered
@@ -34,7 +34,7 @@ def run_pipeline(seed: int):
     if not processed_dir.exists() or not list(processed_dir.glob('*.pkl')):
         raise FileNotFoundError(
             f'No processed data found in {processed_dir}. '
-            'Please place the raw .mat files in data/raw/NASA and run preprocess_pipeline.py first.'
+            'Run scripts/preprocess_pipeline.py --datasets NASA first.'
         )
 
     workspace = ROOT / 'workspaces' / 'custom' / 'xgb_nasa'
@@ -47,7 +47,7 @@ def run_pipeline(seed: int):
     pipeline = Pipeline(CONFIG_PATH, str(workspace))
     model, dataset = pipeline.train(seed=seed)
 
-    model_path = MODELS_DIR / 'xgb_nasa_soh.pkl'
+    model_path = MODELS_DIR / 'xgb_nasa.pkl'
     with open(model_path, 'wb') as f:
         pickle.dump(model, f)
     print(f'  Model saved -> {model_path}')
